@@ -30,11 +30,11 @@ col1, col2 = st.columns(2)
 
 with col1:
   # 내가 가진 돈(기본값 USD)로 설정
-  base_currency = st.selectbox("기준통화"), currency_list, index=1
+  base_currency = st.selectbox("기준통화", currency_list, index=1)
 
 with col2:
   # 목표 통화 설정
-  target_currency = st. selectbox("목표통화"), currency_list, index=1
+  target_currency = st.selectbox("목표통화", currency_list, index=1)
 
 # 환전 할 금액 입력
 amount = st.number_input("환전할 금액을 입력하세요", min_value=1.0, value=100)
