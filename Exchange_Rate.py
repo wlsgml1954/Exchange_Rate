@@ -16,7 +16,7 @@ def get_exchange_rate(base, target, amount):
     rate = data["rate"][target] # 현재 환율
     result = amount * rate # 변경된 금액
     return rate, result
-  else
+  else:
     return None, None
 
 # 2. 웹페이지 화면 구성
