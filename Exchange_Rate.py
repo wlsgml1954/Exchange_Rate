@@ -39,10 +39,10 @@ with col2:
 col3, col4 = st.columns(2)
 with col3:
   # 환전할 금액 열 추가
-  base_amount = st.number_input("", min_value=1.0, value=1.0, key="input")
+  base_amount = st.number_input("", min_value=1.0, value=1.0, key="input1")
 
 with col4:
-  target_amount = st.number_input("", min_value=1.0, value=1.0, key="input")  
+  target_amount = st.number_input("", min_value=1.0, value=1.0, key="input2")  
 
 # 환전 할 금액 입력
 amount = st.number_input("환전할 금액을 입력하세요", min_value=1.0, value=100.0)
