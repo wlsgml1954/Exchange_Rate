@@ -41,6 +41,10 @@ with col3:
   # 환전할 금액 열 추가
   base_amount = st.number_input("", min_value=1.0, value=1.0, key="input1")
 
+  if base_currency = target_currency:
+    result = target_amount
+    
+
 with col4:
   target_amount = st.number_input("", min_value=1.0, value=1.0, key="input2")  
 
