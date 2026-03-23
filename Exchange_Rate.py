@@ -12,8 +12,8 @@ def get_exchange_rate(base, target, amount):
   data = response.json() #파이썬이 읽기 쉽게 변환
 
   # 알고 싶은 통화(target 변수)의 데이터가 있는지 확인
-  if target in data["rate"]:
-    rate = data["rate"][target] # 현재 환율
+  if target in data["rates"]:
+    rate = data["rates"][target] # 현재 환율
     result = amount * rate # 변경된 금액
     return rate, result
   else:
