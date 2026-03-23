@@ -44,5 +44,5 @@ if st.button("환율 계산"):
   rate, result = get_exchange_rate(base_currency, target_currency, amount)
   st.info(f"환전결과:{amount:,.2f}{base_currency} → {result:,.2f}{target_currency}")
 else:
-  st.error{"환율 정보를 가져오는데 실패했습니다."}
+  st.error("환율 정보를 가져오는데 실패했습니다.")
 
