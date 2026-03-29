@@ -54,7 +54,7 @@ col1, col2 = st.columns(2)
 
 with col1:
   # 내가 가진 돈(기본값 USD)로 설정
-  base_currency = st.selectbox("기준통화", currency_list, key="curr_top", on_change=currency_change)
+  st.selectbox("기준통화", currency_list, key="curr_top", on_change=currency_change)
 
 with col2:
   # 환전할 금액 열 추가
@@ -65,17 +65,6 @@ col3, col4 = st.columns(2)
 with col3:
   # 목표 통화 설정
   st.selectbox("목표통화", currency_list, key="curr_bot", on_change=currency_change)
-
-# 3. 환율 계산 실시간 결과 출력
-# if base_currency == target_currency:
-  #rate = 1.0
-#   result = base_amount
-# else:
-#   rate = get_exchange_rate(base_currency, target_currency)
-#   if rate is not None:
-#     result = base_amount * rate
-#   else:
-#     result = 1.0 
     
 with col4:
   st.number_input("", key="amount_bot", on_change=cal_top)
