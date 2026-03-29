@@ -54,7 +54,7 @@ else:
     result = 1.0 
     
 with col4:
-  st.number_input("", value=float(result), key="input2)
+  st.number_input("", value=float(result), key="input2")
   
 #st.info(f"환전결과:{base_amount:,.2f}{base_currency} → {result:,.2f}{target_currency}")
 #st.error("환율 정보를 가져오는데 실패했습니다.")
