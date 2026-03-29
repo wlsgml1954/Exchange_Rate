@@ -49,7 +49,7 @@ with col4:
    # rate, result = get_exchange_rate(base_currency, target_currency)
 
 # 환전 할 금액 입력
-amount = st.number_input("환전할 금액을 입력하세요", min_value=1.0, value=100.0)
+# amount = st.number_input("환전할 금액을 입력하세요", min_value=1.0, value=100.0)
 
 # 3. 환율 계산 실시간 결과 출력
 if base_currency == target_currency:
