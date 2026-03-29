@@ -44,8 +44,7 @@ with col3:
   if base_currency == target_currency:
     result = target_amount
   else:
-    rate, result = get_exchange_rate(base_currency, target_currency, amount)
-    
+    rate, result = get_exchange_rate(base_currency, target_currency)
 
 with col4:
   target_amount = st.number_input("", min_value=1.0, value=1.0, key="input2")  
