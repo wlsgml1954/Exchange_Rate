@@ -40,7 +40,7 @@ def cal_top():
   if rate:
     st.seesion_state_amount_top = st.session_state.amount_bot*rate
 
-def currency_change()
+def currency_change():
   cal_bottom()
 
 # 2. 웹페이지 화면 구성
@@ -54,7 +54,7 @@ col1, col2 = st.columns(2)
 
 with col1:
   # 내가 가진 돈(기본값 USD)로 설정
-  base_currency = st.selectbox("기준통화", currency_list, index=1)
+  base_currency = st.selectbox("기준통화", currency_list, key="curr_top" on change=currency_change)
 
 with col2:
   # 환전할 금액 열 추가
