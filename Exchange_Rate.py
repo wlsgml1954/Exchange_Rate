@@ -33,12 +33,12 @@ if "amount_top" not in st.session_state:
 def cal_bottom():
   rate = get_exchange_rate(st.session_state.curr_top, st.session_state.curr_bot)
   if rate:
-    st.seesion_state_amount_bot = st.session_state.amount_top*rate
+    st.session_state_amount_bot = st.session_state.amount_top*rate
 
 def cal_top():
   rate = get_exchange_rate(st.session_state.curr_bot, st.session_state.curr_top)
   if rate:
-    st.seesion_state_amount_top = st.session_state.amount_bot*rate
+    st.session_state_amount_top = st.session_state.amount_bot*rate
 
 def currency_change():
   cal_bottom()
