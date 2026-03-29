@@ -18,6 +18,30 @@ def get_exchange_rate(base, target):
     return rate
   else:
     return None
+# 콜백함수와 세션 설정
+if "amount_top" not in st.session_state:
+  st.session_state.amount_top=1.0
+  st.session_state.amount_bot=1.0
+  st.session_state.curr_top="USD"
+  st.session_state.curr_bot="KRW"
+
+  # 매달러 1.0 기준 원화 계산
+  rate = get_exchange_rate("USD", "KRW")
+  if rate:
+    st.session_state.amount_bot = 1.0 * rate
+    
+def cal_bottom():
+  rate = get_exchange_rate(st.session_state.curr_top, st.session_state.curr_bot)
+  if rate:
+    st.seesion_state_amount_bot = st.session_state.amount_top*rate
+
+def cal_top():
+  rate = get_exchange_rate(st.session_state.curr_bot, st.session_state.curr_top)
+  if rate:
+    st.seesion_state_amount_top = st.session_state.amount_bot*rate
+
+def currency_change()
+  cal_bottom()
 
 # 2. 웹페이지 화면 구성
 st.title("실시간 환율 계산기")
@@ -35,6 +59,8 @@ with col1:
 with col2:
   # 환전할 금액 열 추가
   base_amount = st.number_input("", min_value=1.0, value=1.0, key="input1")
+
+
 
 col3, col4 = st.columns(2)
 
