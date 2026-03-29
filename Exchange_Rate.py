@@ -54,33 +54,33 @@ col1, col2 = st.columns(2)
 
 with col1:
   # 내가 가진 돈(기본값 USD)로 설정
-  base_currency = st.selectbox("기준통화", currency_list, key="curr_top" on change=currency_change)
+  base_currency = st.selectbox("기준통화", currency_list, key="curr_top" on_change=currency_change)
 
 with col2:
   # 환전할 금액 열 추가
-  base_amount = st.number_input("", min_value=1.0, value=1.0, key="input1")
-
-
+  st.number_input("", min_value=1.0, key="amount_top" on_change=cal_bottom)
 
 col3, col4 = st.columns(2)
 
 with col3:
   # 목표 통화 설정
-  target_currency = st.selectbox("목표통화", currency_list, index=0)
+  st.selectbox("목표통화", currency_list, key="curr_bot" on_change=currency_change)
 
 # 3. 환율 계산 실시간 결과 출력
-if base_currency == target_currency:
-  rate = 1.0
-  result = base_amount
-else:
-  rate = get_exchange_rate(base_currency, target_currency)
-  if rate is not None:
-    result = base_amount * rate
-  else:
-    result = 1.0 
+# if base_currency == target_currency:
+  #rate = 1.0
+#   result = base_amount
+# else:
+#   rate = get_exchange_rate(base_currency, target_currency)
+#   if rate is not None:
+#     result = base_amount * rate
+#   else:
+#     result = 1.0 
     
 with col4:
-  st.number_input("", value=float(result), key="input2")
+  st.number_input("", key="amount_bot", on_change=cal_top)
+
+
   
 #st.info(f"환전결과:{base_amount:,.2f}{base_currency} → {result:,.2f}{target_currency}")
 #st.error("환율 정보를 가져오는데 실패했습니다.")
