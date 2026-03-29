@@ -54,11 +54,9 @@ else:
     result = 1.0 
     
 with col4:
-  target_amount = st.number_input("", min_value=1.0, value=1.0, key="input2")
+  st.number_input("", value=float(result), key="input2)
   
- st.info(f"환전결과:{base_amount:,.2f}{base_currency} → {result:,.2f}{target_currency}")
- st.error("환율 정보를 가져오는데 실패했습니다.")
-
-
+#st.info(f"환전결과:{base_amount:,.2f}{base_currency} → {result:,.2f}{target_currency}")
+#st.error("환율 정보를 가져오는데 실패했습니다.")
 # 환전 할 금액 입력
 # amount = st.number_input("환전할 금액을 입력하세요", min_value=1.0, value=100.0)
