@@ -117,7 +117,7 @@ for i, btn in enumerate(button):
     if st.button(btn, use_container_width=True):
       click_button(btn)
 
-if st.button("환율 계산",use_container_width=True):
+if st.button("환율 계산",key=f"btn_{btn}" use_container_width=True):
     click_button("환율 적용")
       
 #st.info(f"환전결과:{base_amount:,.2f}{base_currency} → {result:,.2f}{target_currency}")
