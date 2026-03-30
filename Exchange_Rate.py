@@ -70,10 +70,6 @@ with col3:
 with col4:
   st.number_input("", key="amount_bot", on_change=cal_top)
 
-#계산기 UI 만들기
-    st.subheader("계산기")
-
-# 숫자 입력할 textbox(기호때문에 text로 받음, number로 받으면 오류)
 # 계산기 UI 만들기
 st.subheader("계산기")
 
