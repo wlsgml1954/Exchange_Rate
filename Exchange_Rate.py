@@ -35,6 +35,9 @@ if "amount_top" not in st.session_state:
 if "cal_formula" not in st.session_state:
     st.session_state.cal_formula = ""
 
+if "calc_input" not in st.session_state:
+    st.session_state.calc_input = ""
+
 
 def cal_bottom():
     rate = get_exchange_rate(st.session_state.curr_top, st.session_state.curr_bot)
@@ -56,26 +59,28 @@ def currency_change():
 def click_button(val):
     if val == "=":
         try:
-            # 수식 계산
-            formula = st.session_state.cal_formula.replace("x", "*").replace("%", "/")
+            formula = st.session_state.calc_input
             result_value = eval(formula)
+            st.session_state.calc_input = str(result_value)
             st.session_state.cal_formula = str(result_value)
         except:
+            st.session_state.calc_input = "Error"
             st.session_state.cal_formula = "Error"
 
     elif val == "C":
+        st.session_state.calc_input = ""
         st.session_state.cal_formula = ""
 
     elif val == "환율 적용":
         try:
-            # 계산 결과를 상단 환율 입력 필드로 전송
-            st.session_state.amount_top = float(st.session_state.cal_formula)
+            st.session_state.amount_top = float(st.session_state.calc_input)
             cal_bottom()
         except:
             pass
 
     else:
-        st.session_state.cal_formula += str(val)
+        st.session_state.calc_input += str(val)
+        st.session_state.cal_formula = st.session_state.calc_input
 
 
 # 2. 웹페이지 화면 구성
@@ -107,8 +112,8 @@ with col4:
 # 계산기 UI 만들기
 st.subheader("계산기")
 
-# 숫자를 입력할 텍스트 박스 만들기
-st.session_state.cal_formula = st.text_input("수식입력:", value=st.session_state.cal_formula)
+# 직접 입력도 가능하게
+st.session_state.calc_input = st.text_input("수식입력:", value=st.session_state.calc_input)
 
 # 계산기 버튼 만들기
 buttons = [
@@ -124,17 +129,19 @@ for i, btn in enumerate(buttons):
     with cols[i % 4]:
         if st.button(btn, key=f"btn_{i}", use_container_width=True):
             click_button(btn)
+            st.rerun()
 
-# 추가 버튼
 col_a, col_b = st.columns(2)
 
 with col_a:
     if st.button("C", use_container_width=True):
         click_button("C")
+        st.rerun()
 
 with col_b:
     if st.button("환율 적용", use_container_width=True):
         click_button("환율 적용")
+        st.rerun()
 
 #st.info(f"환전결과:{base_amount:,.2f}{base_currency} → {result:,.2f}{target_currency}")
 #st.error("환율 정보를 가져오는데 실패했습니다.")
