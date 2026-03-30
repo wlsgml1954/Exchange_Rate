@@ -18,6 +18,7 @@ def get_exchange_rate(base, target):
     return rate
   else:
     return None
+    
 # 콜백함수와 세션 설정
 if "amount_top" not in st.session_state:
   st.session_state.amount_top=1.0
@@ -58,6 +59,14 @@ def click_button(val):
       st.session_state.cal_formula = "Error"
   elif val =='C':
     st.session_state.cal_formula = ""
+  elif val == "환율 적용":
+    try:
+      # 계산 결과를 상단 환율 입력필드(top)로 전송
+      st.session_state.amount_top = float(st.session_state.cal_formula)
+      cal_bottom()
+    except:
+      pass    
+      
   else:
     st.session_state.cal_formula += str(result_value)
 
