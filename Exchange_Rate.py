@@ -59,6 +59,7 @@ def click_button(val):
       st.session_state.cal_formula = "Error"
   elif val =='C':
     st.session_state.cal_formula = ""
+  
   elif val == "환율 적용":
     try:
       # 계산 결과를 상단 환율 입력필드(top)로 전송
@@ -115,6 +116,9 @@ for i, btn in enumerate(button):
   with cols[i%4]:
     if st.button(btn, use_container_width=True):
       click_button(btn)
+
+if st.button("환율 계산",use_container_width=True):\
+    click_button("환율 적용")
       
 #st.info(f"환전결과:{base_amount:,.2f}{base_currency} → {result:,.2f}{target_currency}")
 #st.error("환율 정보를 가져오는데 실패했습니다.")
