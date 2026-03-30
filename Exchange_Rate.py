@@ -116,7 +116,10 @@ with col4:
 st.subheader("계산기")
 
 # 숫자 입력할 textbox(기호때문에 text로 받음, number로 받으면 오류)
-st.text_input("수식입력", key="cal_input", on_change=sync_formula)
+user_input = st.text_input("수식입력", value=st.session_state.cal_formula)
+
+if user_input != st.session_state.cal_formula:
+    st.session_state.cal_formula = user_input
 
 # 계산기 button 만들기
 button = [
