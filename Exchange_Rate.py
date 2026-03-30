@@ -104,7 +104,7 @@ button = [
 cols = st.columns(4)
 for i, btn in enumerate(button):
   with cols[i%4]:
-    if st.button[btn, use_container_width==True]:
+    if st.button[btn, use_container_width=True]:
       click_button[btn]
       
 #st.info(f"환전결과:{base_amount:,.2f}{base_currency} → {result:,.2f}{target_currency}")
