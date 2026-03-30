@@ -74,24 +74,30 @@ with col4:
     st.subheader("계산기")
 
 # 숫자 입력할 textbox(기호때문에 text로 받음, number로 받으면 오류)
-st.text_input("수식입력", key="cal_formula")
+# 계산기 UI 만들기
+st.subheader("계산기")
 
-# 계산기 button 만들기
-button = [
-  '7','8','9','%',
-  '4','5','6','x',
-  '1','2','3','-',
-  '0','.','=','+'
+# 숫자를 입력할 텍스트 박스 만들기
+st.text_input("수식입력:", value=st.session_state.cal_formula)
+
+# 계산기 버튼 만들기
+buttons = [
+    '7', '8', '9', '/',
+    '4', '5', '6', '*',
+    '1', '2', '3', '-',
+    '0', '.', '=', '+'
 ]
 
 cols = st.columns(4)
-for i, btn in enumerate(button):
-  with cols[i%4]:
-    if st.button(btn, use_container_width=True):
-      click_button(btn)
 
-if st.button("환율 계산",use_container_width=True):
-    click_button("환율 적용")
+for i, btn in enumerate(buttons):
+    with cols[i % 4]:
+        if st.button(btn, key=f"btn_{btn}", use_container_width=True):
+            click_button(btn)
+
+# 결과 계산 버튼
+if st.button("결과 계산", use_container_width=True):
+    click_button("=")
 
 #st.info(f"환전결과:{base_amount:,.2f}{base_currency} → {result:,.2f}{target_currency}")
 #st.error("환율 정보를 가져오는데 실패했습니다.")
