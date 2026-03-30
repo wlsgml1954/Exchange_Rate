@@ -108,7 +108,7 @@ with col4:
 st.subheader("계산기")
 
 # 숫자를 입력할 텍스트 박스 만들기
-st.text_input("수식입력:", value=st.session_state.cal_formula, disabled=True)
+st.session_state.cal_formula = st.text_input("수식입력:", value=st.session_state.cal_formula)
 
 # 계산기 버튼 만들기
 buttons = [
