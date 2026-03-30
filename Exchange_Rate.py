@@ -54,7 +54,7 @@ def click_button(val):
     try:
       # 수식 계산
       result_value = eval(st.session_state.cal_formula.replace('x','*').replace('%','/'))
-      st.session_state.cal_formula = str(result_value)
+      st.session_state.cal_formula = str(val)
     except:
       st.session_state.cal_formula = "Error"
   elif val =='C':
@@ -100,9 +100,6 @@ with col4:
 # 계산기 UI 만들기
 st.subheader("계산기")
 
-# 숫자 입력할 textbox(기호때문에 text로 받음, number로 받으면 오류)
-st.text_input("수식입력", key="cal_formula")
-
 # 계산기 button 만들기
 button = [
   '7','8','9','%',
@@ -119,7 +116,11 @@ for i, btn in enumerate(button):
 
 if st.button("환율 계산",key=f"btn_{btn}", use_container_width=True):
     click_button("환율 적용")
-      
+
+# 숫자 입력할 textbox(기호때문에 text로 받음, number로 받으면 오류)
+st.text_input("수식입력", key="cal_formula")
+
+
 #st.info(f"환전결과:{base_amount:,.2f}{base_currency} → {result:,.2f}{target_currency}")
 #st.error("환율 정보를 가져오는데 실패했습니다.")
 # 환전 할 금액 입력
