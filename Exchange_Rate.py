@@ -44,6 +44,31 @@ def cal_top():
 def currency_change():
   cal_bottom()
 
+# 계산기 기능 함수 만들기
+def click_button(val):
+  if val == "=":
+    try:
+      # 수식 계산
+      formula = st.session_state.cal_formula.replace("x", "*").replace("%", "/")
+      result_value = eval(formula)
+      st.session_state.cal_formula = str(result_value)
+    except:
+      st.session_state.cal_formula = "Error"
+
+  elif val == "C":
+    st.session_state.cal_formula = ""
+
+  elif val == "환율 적용":
+    try:
+      # 계산 결과를 상단 환율 입력 필드로 전송
+      st.session_state.amount_top = float(st.session_state.cal_formula)
+      cal_bottom()
+    except:
+      pass
+
+  else:
+    st.session_state.cal_formula += str(val)
+
 # 2. 웹페이지 화면 구성
 st.title("실시간 환율 계산기")
 
