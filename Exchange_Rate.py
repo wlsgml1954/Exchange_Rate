@@ -112,16 +112,16 @@ buttons = [
 cols = st.columns(4)
 for i, btn in enumerate(buttons):
     with cols[i % 4]:
-        st.button(btn, key=f"btn_{btn}", use_container_with=True, on_click=click_button, args={btn,}) # argument인수, parameter 매개변수
+        st.button(btn, key=f"btn_{btn}", use_container_with=True, on_click=click_button, args=(btn,)) # argument인수, parameter 매개변수
 
 
 col_c, col_apply = st.columns(2)
 
 with col_c:
-    st.button("C", use_container_width=True, on_click=click_button, args={"C",}):        
+    st.button("C", use_container_width=True, on_click=click_button, args=("C",))
 
 with col_appy:
-    st.button("환율계산", use_container_width=True, type="primery", on_click=click_button, args={"환율적용",}):
+    st.button("환율계산", use_container_width=True, type="primery", on_click=click_button, args=("환율적용",)):
 
 #st.info(f"환전결과:{base_amount:,.2f}{base_currency} → {result:,.2f}{target_currency}")
 #st.error("환율 정보를 가져오는데 실패했습니다.")
