@@ -113,8 +113,7 @@ cols = st.columns(4)
 for i, btn in enumerate(buttons):
     with cols[i % 4]:
         st.button(btn, key=f"btn_{btn}", use_container_with=True, on_click=click_button, args={btn,}) # argument인수, parameter 매개변수
-            click_button(btn)
-            st.rerun()
+
 
 col_c, col_apply = st.columns(2)
 
