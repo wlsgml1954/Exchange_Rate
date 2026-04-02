@@ -58,16 +58,17 @@ def evaluate_formula():
             cal_bottom()
         except:
              st.session_state.cal_formula = "Error"
+            
 # 버튼 클릭 시 처리 함수
-    def click_button(val):
-        if val =='=':
-            evaluate_formula()
-        elif val =='C':
-            st.session_state.cal_formula = ""
-        elif val =='환율적용':
-            evaluate_formula()
-        else:
-            st.session_state.cal_formula += str(val)
+def click_button(val):
+    if val =='=':
+        evaluate_formula()
+    elif val =='C':
+        st.session_state.cal_formula = ""
+    elif val =='환율적용':
+        evaluate_formula()
+    else:
+        st.session_state.cal_formula += str(val)
 
 # 2. 웹페이지 화면 구성
 st.title("실시간 환율 계산기")
