@@ -25,63 +25,49 @@ if "amount_top" not in st.session_state:
     st.session_state.amount_bot = 1.0
     st.session_state.curr_top = "USD"
     st.session_state.curr_bot = "KRW"
+    st.session_state.cal_formula = ""
 
-    # 매달러 1.0 기준 원화 계산
+    # 미달러 1.0 기준 원화 계산
     rate = get_exchange_rate("USD", "KRW")
     if rate:
         st.session_state.amount_bot = 1.0 * rate
-
-# 계산기용 세션 설정
-if "cal_formula" not in st.session_state:
-    st.session_state.cal_formula = ""
-
-if "calc_input" not in st.session_state:
-    st.session_state.calc_input = ""
-
 
 def cal_bottom():
     rate = get_exchange_rate(st.session_state.curr_top, st.session_state.curr_bot)
     if rate:
         st.session_state.amount_bot = st.session_state.amount_top * rate
 
-
 def cal_top():
     rate = get_exchange_rate(st.session_state.curr_bot, st.session_state.curr_top)
     if rate:
         st.session_state.amount_top = st.session_state.amount_bot * rate
 
-
 def currency_change():
     cal_bottom()
 
-
 # 계산기 기능 함수 만들기
-def click_button(val):
-    if val == "=":
+def evaluate_formula():
+    raw_input = st.session_state.cal_formula
+    if raw:
         try:
-            formula = st.session_state.calc_input
+            #수식계산
+            formula = raw_input.replace("X","*").replace("%","/")
             result_value = eval(formula)
-            st.session_state.calc_input = str(result_value)
             st.session_state.cal_formula = str(result_value)
-        except:
-            st.session_state.calc_input = "Error"
-            st.session_state.cal_formula = "Error"
-
-    elif val == "C":
-        st.session_state.calc_input = ""
-        st.session_state.cal_formula = ""
-
-    elif val == "환율 적용":
-        try:
-            st.session_state.amount_top = float(st.session_state.calc_input)
+            st.session_state.amount_top = float(result_value)
             cal_bottom()
         except:
-            pass
-
-    else:
-        st.session_state.calc_input += str(val)
-        st.session_state.cal_formula = st.session_state.calc_input
-
+             st.session_state.cal_formula = "Error"
+# 버튼 클릭 시 처리 함수
+    def click_button(val):
+        if val =='=':
+            evaluate_formula()
+        elif val =='C':
+            st.session_state.cal_formula = ""
+        elif val =='환율적용':
+            evaluate_formula()
+        else:
+            st.session_state.cal_formula += str(val)
 
 # 2. 웹페이지 화면 구성
 st.title("실시간 환율 계산기")
@@ -93,7 +79,7 @@ currency_list = ["KRW", "USD", "TWD", "EUR", "JPY", "GBP"]
 col1, col2 = st.columns(2)
 
 with col1:
-    # 내가 가진 돈(기본값 USD)로 설정
+    # 내가 가진 돈(기본값 USD)로 설정, Key라는건 selectbox의 이름임, on_change는 콜백함수임
     st.selectbox("기준통화", currency_list, key="curr_top", on_change=currency_change)
 
 with col2:
@@ -109,11 +95,11 @@ with col3:
 with col4:
     st.number_input("", key="amount_bot", on_change=cal_top)
 
-# 계산기 UI 만들기
-st.subheader("계산기")
+st.divider() #구분선
 
-# 직접 입력도 가능하게
-st.session_state.calc_input = st.text_input("수식입력:", value=st.session_state.calc_input)
+# 계산기 입력 만들기
+# 숫자 입력할 텍스트박스 만들기
+st.text_input("", key='cal_formula', on_change=evaluate_formula)
 
 # 계산기 버튼 만들기
 buttons = [
@@ -124,24 +110,19 @@ buttons = [
 ]
 
 cols = st.columns(4)
-
 for i, btn in enumerate(buttons):
     with cols[i % 4]:
-        if st.button(btn, key=f"btn_{i}", use_container_width=True):
+        st.button(btn, key=f"btn_{btn}", use_container_with=True, on_click=click_button, args={btn,}) # argument인수, parameter 매개변수
             click_button(btn)
             st.rerun()
 
-col_a, col_b = st.columns(2)
+col_c, col_apply = st.columns(2)
 
-with col_a:
-    if st.button("C", use_container_width=True):
-        click_button("C")
-        st.rerun()
+with col_c:
+    st.button("C", use_container_width=True, on_click=click_button, args={"C",}):        
 
-with col_b:
-    if st.button("환율 적용", use_container_width=True):
-        click_button("환율 적용")
-        st.rerun()
+with col_appy:
+    st.button("환율계산", use_container_width=True, type="primery", on_click=click_button, args={"환율적용",}):
 
 #st.info(f"환전결과:{base_amount:,.2f}{base_currency} → {result:,.2f}{target_currency}")
 #st.error("환율 정보를 가져오는데 실패했습니다.")
