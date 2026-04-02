@@ -121,7 +121,7 @@ col_c, col_apply = st.columns(2)
 with col_c:
     st.button("C", use_container_width=True, on_click=click_button, args=("C",))
 
-with col_appy:
+with col_apply:
     st.button("환율계산", use_container_width=True, type="primary", on_click=click_button, args=("환율적용",))
 
 #st.info(f"환전결과:{base_amount:,.2f}{base_currency} → {result:,.2f}{target_currency}")
