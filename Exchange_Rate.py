@@ -48,7 +48,7 @@ def currency_change():
 # 계산기 기능 함수 만들기
 def evaluate_formula():
     raw_input = st.session_state.cal_formula
-    if raw:
+    if raw_input:
         try:
             #수식계산
             formula = raw_input.replace("X","*").replace("%","/")
